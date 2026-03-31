@@ -65,10 +65,6 @@ jobs:
           python -m pip install --upgrade pip wheel
           pip install lk21==1.5.61 pymongo pymongo[srv] pymongo[tls] certifi curl_cffi
           
-      - name: Download remote archive
-        run: |
-          git clone https://github.com/shanyou0815/MissAV-Downloader-New
-          
 
       - name: Downloading
         id: downloading
@@ -80,7 +76,7 @@ jobs:
           fi
           id=$(echo "$response" | jq -r '.[0].id')
           url=$(echo "$response" | jq -r '.[0].url')
-          python MissAV-Downloader-New/miyuki/miyuki-new.py -urls "$url"
+          python miyuki.py -urls "$url"
           # mkdir downloads
           # python transfer.py  --con="${{ secrets.DB_CONNECT }}" --isnow=0
           filename=$(ls movies_folder_miyuki | head -n1)
